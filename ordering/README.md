@@ -1,25 +1,17 @@
 ### Introduction
-Code for comparing SubseqHash with minimizer on the seeding step of bucketing related sequences. For this purpose, sequences that share at least one common seed are put into the same bucket.
+Code for comparing SubseqHash with different ordering. First generated the order with tables A/B/C, then compute the similarity of neighboring strings in an order.
 
-The read-files (.efa) and ground truth pairs (.truepairs) 
-of all datasets used in the paper as well as the random tables used are
-available [here]().
 
 ### Installation
 ```
 git clone https://github.com/Shao-Group/subseqhash.git
-cd subseqhash/bucketing
-make product
+cd subseqhash/ordering
+g++ -o getABCorder getABCorder.cpp -std=c++11
+g++ -o statistics statistics.cpp -std=c++11
 ```
 ### Usage
-- To generate bucketing pairs using SubseqHash:
-  - Run `./genSubseqSeeds.out readFile n k d tableName` to generate seeds for a read-file, change `NUMTHREADS` in `genSubseqSeeds.cpp` to allow parallelization. Example: `./genSubseqSeeds.out SRX533603.efa 30 19 11 ABC30191.table`. This call creates a directory `SRX533603-seeds-ABC30191.table-n30-k19-d11/` which contains all the seed-files, one for each read in the read-file.
-  - Run `./bucketBySeeds.out seedDir numReads` to bucket the reads according to the seed-files. Example: `./bucketBySeeds.out SRX533603-seeds-ABC30191.table-n30-k19-d11/ 10000`. This call creates a file named `bucket-n10000.all-pair` in the given seed-directory.
-  
-- To generate bucketing pairs using minimizer: Run `./bucketByMinimizer.out readFile w k`. Note that `w` here is the number of `k`-mers in a window. Example: `./bucketByMinimizer.out SRX533603.efa 6 10`. This call creates a file named `SRX533603-bucketMinimizer-w6-k10.all-pair`, it corresponds to the right most point of `Minimizer 15` of Figure 8(a) in [our paper]().
+- To generate an order and tables A/B/C:
+  - Run `./getABCorder k d m path_to_stringlist path_to_table` to generate an order and tables A/B/C. Only first m strings in the ordering will be saved to `path_to_stringlist`. `path_to_stringlist` contains m lines, each line contains a string of length k, a double value \omega and an int value \phi. `path_to_table` saves tables A/B/C. Table A contains `k` matrix, each matrix is `d` * 4. Table B also contains `k` matrix, each matrix is also `d` * 4. Table C only has one matrix, the size of it is `k` * 4.
 
-- To generate bucketing pairs using plain kmer: Run `./bucketByKMer.out readFile k`. Example: `./bucketByKMer.out SRX533603.efa 15`. This call creates a file named `SRX533603-bucketKMer-k15.all-pair`.
-  
-- The `bucketFileOp.js` script can be used to take union/intersection of bucketing pair results. It requires the [k8](https://github.com/attractivechaos/k8) library.
-  - Example for obtaining the union of two result files (used for repeating SubseqHash): `./bucketFileOp.js union SRX533603-seeds-ABC30191.table/bucket-n10000.all-pair SRX533603-seeds-ABC30192.table/bucket-n10000.all-pair > union2.all-pair`.
-  - Example for obtaining the intersection of two files (used for comparing bucketing results versus the ground truth): `./bucketFileOp.js intersection SRX533603-sample10k.truepairs SRX533603-seeds-ABC30191.table/bucket-n10000.all-pair > ABC30191.intersection`.
+- To get the statistics results of the generated order:
+  - Run `statistics k m path_to_stringlist`. `m` must be equal to or less than the number of the strings saved in `path_to_stringlist`.
