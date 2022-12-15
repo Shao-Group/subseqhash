@@ -31,7 +31,7 @@ void getAllKMers(const string &read, const size_t read_idx, const int k,
 int main(int argc, const char * argv[])
 {    
     if(argc != 3){
-	printf("usage: bucketByKMer.out readFile k\n");
+	printf("usage: overlapByKMer.out readFile k\n");
 	return 1;
     }
 
@@ -73,7 +73,7 @@ int main(int argc, const char * argv[])
 
     char output_file[200];
     int file_len = strstr(argv[1], ".efa") - argv[1];
-    file_len = sprintf(output_file, "%.*s-bucketKMer-k%d.all-pair",
+    file_len = sprintf(output_file, "%.*s-overlapKMer-k%d.all-pair",
 		       file_len, argv[1], k);
     share_ct.saveNoneZeroEntries(output_file);
     

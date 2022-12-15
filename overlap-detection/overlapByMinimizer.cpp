@@ -106,7 +106,7 @@ void getAllMinimizers(const string &read, const size_t read_idx, const int w,
 int main(int argc, const char * argv[])
 {    
     if(argc != 4){
-	printf("usage: bucketByMinimizer.out readFile w k\n");
+	printf("usage: overlapByMinimizer.out readFile w k\n");
 	return 1;
     }
 
@@ -149,7 +149,7 @@ int main(int argc, const char * argv[])
 
     char output_file[200];
     int file_len = strstr(argv[1], ".efa") - argv[1];
-    file_len = sprintf(output_file, "%.*s-bucketMinimizer-w%d-k%d.all-pair",
+    file_len = sprintf(output_file, "%.*s-overlapMinimizer-w%d-k%d.all-pair",
 		       file_len, argv[1], w, k);
     share_ct.saveNoneZeroEntries(output_file);
     

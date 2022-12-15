@@ -1,5 +1,5 @@
 /*
-  Utility functions for the bucketing with SubseqHash project.
+  Utility functions for the overlap detection with SubseqHash project.
 
   By: Ke@PSU
   Last edited: 09/30/2022

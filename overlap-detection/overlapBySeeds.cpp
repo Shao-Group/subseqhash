@@ -16,7 +16,7 @@ using namespace std;
 int main(int argc, const char * argv[])    
 {   
     if(argc != 3){
-	printf("usage: bucketBySeeds.out seedsDir numFiles\n");
+	printf("usage: overlapBySeeds.out seedsDir numFiles\n");
 	return 1;
     }
 
@@ -45,7 +45,7 @@ int main(int argc, const char * argv[])
 	loadSubseqSeeds(filename, j, all_seeds);
     }
 
-    sprintf(filename+i, "bucket-n%d.all-pair", n);
+    sprintf(filename+i, "overlap-n%d.all-pair", n);
 
     Table share_ct(n);
 
