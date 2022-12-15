@@ -1,5 +1,5 @@
 ### Introduction
-Code for comparing the Probability of Hash Collision minimizer and SubseqHash with different ordering. 
+Code for comparing the Probability of Hash Collision between minimizer and SubseqHash with different ordering. 
 
 
 ### Installation
