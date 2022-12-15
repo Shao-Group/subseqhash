@@ -1,7 +1,7 @@
 #!/usr/bin/env k8
 
 /*
-  Given two bucketing results, compute their intersection or union.
+  Given two overlap detection results, compute their intersection or union.
 
   In the files, each line starts with the two labels of the related pair. The files are assumed to
   have been sorted by -k1,1n -k2,2n, and there is no repeat wrt the first two fields.
@@ -35,7 +35,7 @@ function processOneLine(fin, buf){
 function main(args)
 {
     if(args.length != 3){
-	print("Usage: bucketFileOp.js <union|intersection> <file1> <file2>");
+	print("Usage: overlapFileOp.js <union|intersection> <file1> <file2>");
 	exit(1);
     }
 
