@@ -221,7 +221,7 @@ vector<seed> get_bmers(string s, int k, int b, int r0)
 				break;
 			}
 		
-		if(ret.size() > 0 && tmp.hashval == ret.back().hashval)
+		if(ret.size() > 0 && tmp.hashval == ret.back().hashval && ret.back().st >= st)
 		{
 			ret.back().ken = st + k - 1;
 			continue;
@@ -264,7 +264,6 @@ vector<seed> get_bmers(string s, int k, int b, int r0)
 		}
 		tmp.st = tmp.index.back();
 		tmp.en = tmp.index.front();
-
 		tmp.kst = st;
 		tmp.ken = st + k - 1;
 
